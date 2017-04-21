@@ -25,16 +25,21 @@ class BST:
         elif type_search == 2: #Search by Name
             if (root == -1):
                 root = self.root
-            se = (root.code, root.informations.name, root.informations.gender, root.informations.state, root.informations.value)
-            if (root is not None):
-                if root.informations.name == data:
-                    return (root.code, root.informations.name, root.informations.gender, root.informations.state, root.informations.value)
-                if root.left != None:
-                    se = self.search(type_search, data, root.left)
-                    return
-                if root.right is not None:
-                    se = self.search(type_search, data, root.right)
-            return se
+            elements = None
+            dados = None
+            if root.left is not None:
+                elements = self.search(type_search, data, root.left)
+            if dados is None:
+                dados = elements
+            if root.right is not None:
+                elements = self.search(type_search, data, root.right)
+            if root.informations.name is data:
+                elements = root.informations
+                return(root.code, elements.name, elements.gender, elements.state, elements.value)
+            if dados is None:
+                dados = elements
+            return dados
+
 
     def get_informations(self, code):
         root = self.root
