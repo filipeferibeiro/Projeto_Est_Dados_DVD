@@ -15,6 +15,20 @@ class BST:
                 root.left = self.insert(code, name, gender, state, value, root.left)
             return root
 
+    def balanced(self, data, root = -1): # Não está funcionando
+        if self.root is None:
+            return None
+        if root is -1:
+            root = self.root
+        if root.left is not None:
+            ji = self.balanced(data, root.left)
+        if root.right is not None:
+            ji = self.balanced(data, root.right)
+        if root.right is None and root.left is None:
+            return '='
+
+
+
     def search(self, type_search, data, root = -1):
         if type_search == 1: #Search by Code
             elements = self.get_informations(data)
@@ -31,6 +45,8 @@ class BST:
                 elements = self.search(type_search, data, root.left)
             if dados is None:
                 dados = elements
+            if dados is not None:
+                return dados
             if root.right is not None:
                 elements = self.search(type_search, data, root.right)
             if root.informations.name is data:
@@ -38,7 +54,14 @@ class BST:
                 return(root.code, elements.name, elements.gender, elements.state, elements.value)
             if dados is None:
                 dados = elements
+            if dados is not None:
+                return dados
             return dados
+
+    #def login(self, user, password, database):
+     #   if user in database:
+      #      if password is
+
 
 
     def get_informations(self, code):
