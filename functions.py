@@ -15,19 +15,53 @@ class BST:
                 root.left = self.insert(code, name, gender, state, value, root.left)
             return root
 
-    def balanced(self, data, root = -1): # Não está funcionando
+    def balanced(self, root = -1): # está funcionando
         if self.root is None:
             return None
         if root is -1:
             root = self.root
+        ji = 0
+        ji2 = 0
         if root.left is not None:
-            ji = self.balanced(data, root.left)
+            ji = self.balanced(root.left)
         if root.right is not None:
-            ji = self.balanced(data, root.right)
-        if root.right is None and root.left is None:
-            return '='
+            ji2 = self.balanced(root.right)
+        if ji is not 0:
+            return ji
+        if ji2 is not 0:
+            return ji2
+        if root.left is None and root.right is None:
+            return 0
+        else:
+            esq = self.ObterAltura(root.left)
+            dir = self.ObterAltura(root.right)
+            if (esq - dir) >= 2 or (dir - esq) >= 2:
+                return root.code
+            else:
+                return 0
 
 
+
+
+    def ObterAltura(self, root=-1):
+        if self.root is None:
+            return
+        if root is -1:
+            root = self.root
+        if root is None:
+            return 0
+        maioraltura = 0
+        altura = 0
+        if root.left is not None:
+            altura = self.ObterAltura(root.left)
+        if altura > maioraltura:
+            maioraltura = altura
+        if root.right is not None:
+            altura = self.ObterAltura(root.right)
+        if altura > maioraltura:
+            maioraltura = altura
+
+        return (maioraltura + 1)
 
     def search(self, type_search, data, root = -1):
         if type_search == 1: #Search by Code
