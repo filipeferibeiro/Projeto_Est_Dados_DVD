@@ -32,50 +32,32 @@ while True:
             try:
                 os.system("cls")
                 print(LDE)
-                type = int(input("1 - Por código\n2 - Por nome\n3 - Por categoria\n4 - Voltar\n\n"))
+                type_search = int(input("1 - Por código\n2 - Por nome\n3 - Por categoria\n4 - Voltar\n\n"))
                 cond2 = False
-                if type == 1:
-                    os.system("cls")
-                    print(LDE)
+                os.system("cls")
+                print(LDE)
+                if type_search == 1:
                     data = int(input("Código: "))
-                    if Locadora.search(type, data) == None:
+                elif type_search == 2:
+                    data = input("Nome: ")
+                elif type_search == 3:
+                    data = input("Categoria: ")
+                elif type_search == 4:
+                    cond1 = True
+                    break
+                if type_search == 1 or type_search == 2 or type_search == 3:
+                    if Locadora.search(type_search, data) is None:
                         os.system("cls")
                         print(LDE, "\nFilme não encontrado.")
                         time.sleep(3)
                         cond2 = True
                     else:
-                        a, b, c, d, e = Locadora.search(type, data)
+                        a, b, c, d, e = Locadora.search(type_search, data)
                         os.system("cls")
                         print(LDE)
                         print("Código do DVD:", a, "\nNome do filme:", b, "\nGênero:", c, "\nSituação:", d, "\nValor do aluguel:", e, "\n")
                         input("Pressione enter para continuar")
                         cond1 = True
-                elif type == 2:
-                    os.system("cls")
-                    print(LDE)
-                    data = input("Nome: ")
-                    data = data.lower()
-                    if Locadora.search(type, data) == None:
-                        os.system("cls")
-                        print(LDE, "\nFilme não encontrado.")
-                        time.sleep(3)
-                        cond2 = True
-                    else:
-                        a, b, c, d, e = Locadora.search(type, data)
-                        os.system("cls")
-                        print(LDE)
-                        print("Código do DVD:", a, "\nNome do filme:", b, "\nGênero:", c, "\nSituação:", d, "\nValor do aluguel:", e)
-                        input("Pressione enter para continuar")
-                        cond1 = True
-
-                elif type == 3:
-                    os.system("cls")
-                    print(LDE)
-                    print("Opção ainda não implementada. Tente novamente em futuras atualizações.")
-                    time.sleep(3)
-                elif type == 4:
-                    cond1 = True
-                    break
                 else:
                     os.system("cls")
                     print(LDE, "\nPor favor, escolha algo válido.")
