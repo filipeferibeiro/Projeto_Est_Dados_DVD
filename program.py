@@ -40,7 +40,6 @@ while True:
                     data = int(input("Código: "))
                 elif type_search == 2:
                     data = input("Nome: ")
-<<<<<<< HEAD
                 elif type_search == 3:
                     data = input("Categoria: ")
                 elif type_search == 4:
@@ -48,10 +47,6 @@ while True:
                     break
                 if type_search == 1 or type_search == 2 or type_search == 3:
                     if Locadora.search(type_search, data) is None:
-=======
-                    data = data.lower()
-                    if (Locadora.search(type, data)) == None:
->>>>>>> 6531c5bbb60426b1785bca065c0265e8adf20c1e
                         os.system("cls")
                         print(LDE, "\nFilme não encontrado.")
                         time.sleep(3)
@@ -99,7 +94,5 @@ while True:
         print(LDE)
         print("Filme adicionado.")
         time.sleep(2)
-        print(Locadora.search(2,'abusca'))
-        time.sleep(53)
     if option == 5:
         break
