@@ -55,7 +55,7 @@ while True:
                     print(LDE)
                     data = input("Nome: ")
                     data = data.lower()
-                    if Locadora.search(type, data) == None:
+                    if (Locadora.search(type, data)) == None:
                         os.system("cls")
                         print(LDE, "\nFilme não encontrado.")
                         time.sleep(3)
@@ -112,5 +112,7 @@ while True:
         print(LDE)
         print("Filme adicionado.")
         time.sleep(2)
+        print(Locadora.search(2,'abusca'))
+        time.sleep(53)
     if option == 5:
         break
