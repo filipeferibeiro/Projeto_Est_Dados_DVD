@@ -40,9 +40,6 @@ class BST:
             else:
                 return 0
 
-
-
-
     def ObterAltura(self, root=-1):
         if self.root is None:
             return
@@ -63,14 +60,19 @@ class BST:
 
         return (maioraltura + 1)
 
+
+
+
     def search(self, type_search, data, root = -1):
         if type_search == 1: #Search by Code
             elements = self.get_informations(data)
             if elements != False:
                 return (data, elements.name, elements.gender, elements.state, elements.value)
             else:
-                return 'Filme não encontrado.'
+                return None
         elif type_search == 2: #Search by Name
+            if self.root == None:
+                return None
             if (root == -1):
                 root = self.root
             elements = None
