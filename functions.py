@@ -1,9 +1,11 @@
 class BST:
     def __init__(self):
         self.root = None
+        self.total_nodes = 0
 
     def insert(self, code, name, gender, state, value, root=-1):
         if root == -1:
+            self.total_nodes += 1
             self.root = self.insert(code, name, gender, state, value, self.root)
             return
         else:
@@ -14,6 +16,8 @@ class BST:
             elif code < root.code:
                 root.left = self.insert(code, name, gender, state, value, root.left)
             return root
+    def get_total_nodes(self):
+        return self.total_nodes
 
     def balanced(self, root = -1): # está funcionando
         if self.root is None:
@@ -33,14 +37,14 @@ class BST:
         if root.left is None and root.right is None:
             return 0
         else:
-            esq = self.ObterAltura(root.left)
-            dir = self.ObterAltura(root.right)
+            esq = self.height(root.left)
+            dir = self.height(root.right)
             if (esq - dir) >= 2 or (dir - esq) >= 2:
                 return root.code
             else:
                 return 0
 
-    def ObterAltura(self, root=-1):
+    def height(self, root=-1):
         if self.root is None:
             return
         if root is -1:
@@ -50,11 +54,11 @@ class BST:
         maioraltura = 0
         altura = 0
         if root.left is not None:
-            altura = self.ObterAltura(root.left)
+            altura = self.height(root.left)
         if altura > maioraltura:
             maioraltura = altura
         if root.right is not None:
-            altura = self.ObterAltura(root.right)
+            altura = self.height(root.right)
         if altura > maioraltura:
             maioraltura = altura
 
@@ -65,7 +69,7 @@ class BST:
 
     def search(self, type_search, data, root = -1):
         if type_search == 1: #Search by Code
-            elements = self.get_informations(data)
+            elements = self.get_informations(int(data))
             if elements != False:
                 return (data, elements.name, elements.gender, elements.state, elements.value)
             else:
@@ -85,7 +89,7 @@ class BST:
                 return dados
             if root.right is not None:
                 elements = self.search(type_search, data, root.right)
-            if root.informations.name is data:
+            if root.informations.name == data:
                 elements = root.informations
                 return(root.code, elements.name, elements.gender, elements.state, elements.value)
             if dados is None:
@@ -97,8 +101,84 @@ class BST:
     #def login(self, user, password, database):
      #   if user in database:
       #      if password is
+    def give_back_movie(self, type_give_back_movie, data, root = -1):
+        if type_give_back_movie == 1: #give_back_movie by Code
+            elements = self.get_informations(int(data))
+            if elements != False:
+                if elements.state == 'alugado':
+                    elements.state = 'disponível'
+                    return True
+                else:
+                    return False
+            else:
+                return None
+        elif type_give_back_movie == 2: #give_back_movie by Name
+            if self.root == None:
+                return None
+            if (root == -1):
+                root = self.root
+            elements = None
+            dados = None
+            if root.left is not None:
+                elements = self.give_back_movie(type_give_back_movie, data, root.left)
+            if dados is None:
+                dados = elements
+            if dados is not None:
+                return dados
+            if root.right is not None:
+                elements = self.give_back_movie(type_give_back_movie, data, root.right)
+            if root.informations.name == data:
+                elements = root.informations
+                if elements.state == 'alugado':
+                    elements.state = 'disponível'
+                    return True
+                else:
+                    return False
+            if dados is None:
+                dados = elements
+            if dados is not None:
+                return dados
+            return dados
+        
 
-
+    def rent(self, type_rent, data, root = -1):
+        if type_rent == 1: #rent by Code
+            elements = self.get_informations(int(data))
+            if elements != False:
+                if elements.state == 'disponível':
+                    elements.state = 'alugado'
+                    return True
+                else:
+                    return False
+            else:
+                return None
+        elif type_rent == 2: #rent by Name
+            if self.root == None:
+                return None
+            if (root == -1):
+                root = self.root
+            elements = None
+            dados = None
+            if root.left is not None:
+                elements = self.rent(type_rent, data, root.left)
+            if dados is None:
+                dados = elements
+            if dados is not None:
+                return dados
+            if root.right is not None:
+                elements = self.rent(type_rent, data, root.right)
+            if root.informations.name == data:
+                elements = root.informations
+                if elements.state == 'disponível':
+                    elements.state = 'alugado'
+                    return True
+                else:
+                    return False
+            if dados is None:
+                dados = elements
+            if dados is not None:
+                return dados
+            return dados
 
     def get_informations(self, code):
         root = self.root
@@ -126,12 +206,12 @@ class BST:
 
     def remove_node(self, code, informations = -1, root=-1):
         if (root == -1):
+            self.total_nodes -= 1
             root = self.root
             if root != None:
                 if (informations == -1):
                     informations = self.get_informations(code)
             root = self.remove_node(code, informations, self.root)
-
         else:
             if root == None:
                 return root
@@ -166,7 +246,8 @@ class BST:
 
         if (root is not None):
             self.inOrderTraversal(root.left)
-            print(root.code, root.informations.name, end=' ')
+            print("Código do DVD:", root.code, "\nNome do filme:", root.informations.name, "\nGênero:", root.informations.gender, "\nSituação:", root.informations.state,
+                  "\nValor do aluguel: R$", root.informations.value, "\n--------------------------------------------------------------------------------------")
             self.inOrderTraversal(root.right)
 
 class TreeNode:

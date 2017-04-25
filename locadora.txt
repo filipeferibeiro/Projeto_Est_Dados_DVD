@@ -1,0 +1,18 @@
+Código do DVD: 457
+Nome do filme: jujuba
+Gênero: kfhdgf
+Situação: disponível
+Valor do aluguel: R$856.0
+-------------------------------
+Código do DVD: 2365
+Nome do filme: filme
+Gênero: kjfbdf
+Situação: disponível
+Valor do aluguel: R$123.0
+-------------------------------
+Código do DVD: 236589
+Nome do filme: gugu]
+Gênero: jhgfhf
+Situação: disponível
+Valor do aluguel: R$1254.0
+-------------------------------
