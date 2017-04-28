@@ -1,5 +1,5 @@
 from functions import *
-import os, sys, time
+import os, time
 
 Locadora = BST()
 LDE = "Locadora de Estrutura\n"
@@ -33,7 +33,7 @@ while True:
             print(LDE, "\nPor favor, escolha algo válido.")
             time.sleep(3)
 
-    if option == 1:
+    if option == 1: #Search movie
         os.system("cls")
         print(LDE)
         cond2 = True
@@ -69,7 +69,7 @@ while True:
                         os.system("cls")
                         print(LDE, "\nPor favor, informe algo válido.")
                         time.sleep(3)
-                if type_search == 1 or type_search == 2:
+                if type_search == 1 or type_search == 2: #Search movie by Code or Name
                     if Locadora.search(type_search, str(data)) is not None:
                         a, b, c, d, e = Locadora.search(type_search, data)
                         os.system("cls")
@@ -83,7 +83,7 @@ while True:
                         print(LDE, "\nNão foram encontrador filmes com o termo de pesquisa informado.")
                         time.sleep(3)
                         cond2 = True
-                if type_search == 3:
+                if type_search == 3: #Search movie by Gender
                     if Locadora.search(type_search, str(data)) == None:
                         os.system("cls")
                         print(LDE, "\nFilme não encontrado.")
@@ -91,7 +91,7 @@ while True:
                         cond2 = True
                     else:
                         input("Pressione enter para continuar")
-                elif type_search == 4:
+                elif type_search == 4: #To back in menu
                     cond1 = True
                     break
                 else:
@@ -105,7 +105,7 @@ while True:
                 time.sleep(3)
                 cond2 = True
 
-    elif option == 2:
+    elif option == 2: #List all movies
         os.system("cls")
         print(LDE)
         print("Total de filmes:", Locadora.get_total_nodes())
@@ -113,7 +113,7 @@ while True:
         Locadora.inOrderTraversal()
         input("Pressione enter para continuar.")
 
-    elif option == 3:
+    elif option == 3: #Add movie
         cond4 = True
         cond5 = True
         cond6 = True
@@ -174,7 +174,7 @@ while True:
         print("Filme adicionado.")
         time.sleep(2)
 
-    elif option == 4:
+    elif option == 4: #Remove movie
         os.system("cls")
         print(LDE)
         cond5 = True
@@ -186,12 +186,12 @@ while True:
                 cond5 = False
                 os.system("cls")
                 print(LDE)
-                if type_search == 1:
+                if type_search == 1: #Remove movie by Code
                     data = int(input("Código: "))
-                elif type_search == 2:
+                elif type_search == 2: #Remove movie by Name
                     data = input("Nome: ").lower()
                     print(data)
-                elif type_search == 3:
+                elif type_search == 3: #To back in menu
                     cond1 = True
                     break
                 if type_search == 1 or type_search == 2:
@@ -220,7 +220,7 @@ while True:
                 time.sleep(3)
                 cond5 = True
 
-    elif option == 5:
+    elif option == 5: #Rent movie
         os.system("cls")
         print(LDE)
         cond3 = True
@@ -236,10 +236,10 @@ while True:
                     data = int(input("Código: "))
                 elif type_search == 2:
                     data = input("Nome: ").lower()
-                elif type_search == 3:
+                elif type_search == 3: #To back in menu
                     cond1 = True
                     break
-                if type_search == 1 or type_search == 2:
+                if type_search == 1 or type_search == 2: #Rent movie by Code or Name
                     if Locadora.rent(type_search, str(data)) == True:
                         os.system("cls")
                         print(LDE)
@@ -269,7 +269,7 @@ while True:
                 time.sleep(3)
                 cond3 = True
 
-    elif option == 6:
+    elif option == 6: #Return movie
         os.system("cls")
         print(LDE)
         cond4 = True
@@ -286,10 +286,10 @@ while True:
                 elif type_search == 2:
                     data = input("Nome: ").lower()
                     print(data)
-                elif type_search == 3:
+                elif type_search == 3: #To back in menu
                     cond1 = True
                     break
-                if type_search == 1 or type_search == 2:
+                if type_search == 1 or type_search == 2: #Return movie by Code or Name
                     if Locadora.give_back_movie(type_search, str(data)) == True:
                         os.system("cls")
                         print(LDE)
@@ -319,5 +319,5 @@ while True:
                 time.sleep(3)
                 cond4 = True
 
-    elif option == 7:
+    elif option == 7: #Exit
         break

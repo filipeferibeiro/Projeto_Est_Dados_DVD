@@ -61,7 +61,7 @@ class BST:
     def get_total_nodes(self):
         return self.total_nodes
 
-    def balanced(self, root = -1): # está funcionando
+    def balanced(self, root = -1):
         if self.root is None:
             return None
         if root is -1:
@@ -136,7 +136,7 @@ class BST:
             if dados is not None:
                 return dados
             return dados
-        elif type_search == 3:  # search by category
+        elif type_search == 3:  #Search by category
             if self.root == None:
                 return None
             if root == -1:
@@ -156,10 +156,6 @@ class BST:
                       "\n--------------------------------------------------------------------------------------")
                 return verify
             return verify
-
-    #def login(self, user, password, database):
-     #   if user in database:
-      #      if password is
 
     def give_back_movie(self, type_give_back_movie, data, root = -1):
         if type_give_back_movie == 1: #give_back_movie by Code
