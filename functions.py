@@ -136,6 +136,26 @@ class BST:
             if dados is not None:
                 return dados
             return dados
+        elif type_search == 3: #search by category
+            if self.root == None:
+                return None
+            if root == -1:
+                root = self.root
+            verify = None
+            if root.left is not None:
+                verify = self.search(type_search, data, root.left)
+            if root.right is not None:
+                verify = self.search(type_search, data, root.right)
+            if root.informations.gender == data:
+                verify = 1
+                print('\nCódigo do DVD:', root.code,
+                      '\nNome do filme:', root.informations.name,
+                      '\nGênero:', root.informations.gender,
+                      '\nSituação:', root.informations.state,
+                      '\nValor do aluguel: R$', root.informations.value,
+                      '\n--------------------------------------------------------------------------------------')
+                return verify
+            return verify
 
     #def login(self, user, password, database):
      #   if user in database:
