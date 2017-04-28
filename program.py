@@ -4,16 +4,11 @@ import os, sys, time
 Locadora = BST()
 LDE = "Locadora de Estrutura\n"
 
-'''Locadora.insert(1,'nome','gui', 'disponível', 522)
-Locadora.insert(2,'007','gui', 'disponível', 522)
-Locadora.insert(-1,'hulk','gui', 'disponível', 522)'''
-
 print(LDE)
 login = input("Login: ")
 os.system("cls")
 print(LDE)
 senha = input("Senha: ")
-os.system("cls")
 
 Locadora.get_from_file()
 
@@ -54,13 +49,12 @@ while True:
                     data = int(input("Código: "))
                 elif type_search == 2:
                     data = input("Nome: ").lower()
-                    print(data)
                 elif type_search == 3:
                     data = input("Categoria: ")
                 elif type_search == 4:
                     cond1 = True
                     break
-                if type_search == 1 or type_search == 2 or type_search == 3:
+                if type_search == 1 or type_search == 2:
                     if Locadora.search(type_search, str(data)) is not None:
                         a, b, c, d, e = Locadora.search(type_search, data)
                         os.system("cls")
@@ -74,6 +68,14 @@ while True:
                         print(LDE, "\nFilme não encontrado.")
                         time.sleep(3)
                         cond2 = True
+                if type_search == 3:
+                    if Locadora.search(type_search, str(data)) == None:
+                        os.system("cls")
+                        print(LDE, "\nFilme não encontrado.")
+                        time.sleep(3)
+                        cond2 = True
+                    else:
+                        input("Pressione enter para continuar")
                 else:
                     os.system("cls")
                     print(LDE, "\nPor favor, escolha algo válido.")
