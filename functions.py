@@ -16,6 +16,48 @@ class BST:
             elif code < root.code:
                 root.left = self.insert(code, name, gender, state, value, root.left)
             return root
+
+    def get_from_file(self):
+        vetor = []
+        file = open('locadora.txt', 'r')
+        values = []
+        for i in file:
+            if i[0] == '-':
+                vetor.append(values)
+                values = []
+            if i[0:15] == 'Código do DVD: ':
+                values.append(int(i[15:len(i) -1]))
+            if i[0:15] == 'Nome do filme: ':
+                values.append(i[15:len(i) - 1])
+            if i[0:8] == 'Gênero: ':
+                values.append(i[8:len(i) - 1])
+            if i[0:10] == 'Situação: ':
+                values.append(i[10:len(i) - 1])
+            if i[0:20] == 'Valor do aluguel: R$':
+                values.append(float(i[20:len(i) - 1]))
+        for i in range(len(vetor)):
+            self.insert(vetor[i][0], vetor[i][1], vetor[i][2], vetor[i][3], vetor[i][4])
+
+        file.close()
+
+    def modify_file(self, root = -1):
+        if (root == -1):
+            root = self.root
+            file = open('locadora.txt', 'w')
+            file.write('')
+            file.close()
+        if (root != None):
+            file = open('locadora.txt', 'a')
+            file.write("Código do DVD: " + str(root.code))
+            file.write("\nNome do filme: " + str(root.informations.name))
+            file.write("\nGênero: " + str(root.informations.gender))
+            file.write("\nSituação: " + str(root.informations.state))
+            file.write("\nValor do aluguel: R$" + str(root.informations.value))
+            file.write("\n-------------------------------\n")
+            file.close()
+            self.modify_file(root.left)
+            self.modify_file(root.right)
+
     def get_total_nodes(self):
         return self.total_nodes
 
@@ -64,9 +106,6 @@ class BST:
 
         return (maioraltura + 1)
 
-
-
-
     def search(self, type_search, data, root = -1):
         if type_search == 1: #Search by Code
             elements = self.get_informations(int(data))
@@ -101,6 +140,7 @@ class BST:
     #def login(self, user, password, database):
      #   if user in database:
       #      if password is
+
     def give_back_movie(self, type_give_back_movie, data, root = -1):
         if type_give_back_movie == 1: #give_back_movie by Code
             elements = self.get_informations(int(data))
@@ -139,7 +179,6 @@ class BST:
             if dados is not None:
                 return dados
             return dados
-        
 
     def rent(self, type_rent, data, root = -1):
         if type_rent == 1: #rent by Code
@@ -211,7 +250,7 @@ class BST:
             if root != None:
                 if (informations == -1):
                     informations = self.get_informations(code)
-            root = self.remove_node(code, informations, self.root)
+            self.root = self.remove_node(code, informations, self.root)
         else:
             if root == None:
                 return root
@@ -263,4 +302,3 @@ class NodeInformations:
         self.gender = gender
         self.state = state
         self.value = value
-

@@ -4,10 +4,9 @@ import os, sys, time
 Locadora = BST()
 LDE = "Locadora de Estrutura\n"
 
-
-Locadora.insert(1,'nome','gui', 'disponível', 522)
+'''Locadora.insert(1,'nome','gui', 'disponível', 522)
 Locadora.insert(2,'007','gui', 'disponível', 522)
-Locadora.insert(-1,'hulk','gui', 'disponível', 522)
+Locadora.insert(-1,'hulk','gui', 'disponível', 522)'''
 
 print(LDE)
 login = input("Login: ")
@@ -16,12 +15,21 @@ print(LDE)
 senha = input("Senha: ")
 os.system("cls")
 
+Locadora.get_from_file()
+
 while True:
     cond1 = True
     while cond1 == True:
         os.system("cls")
         print(LDE)
-        print("Escolha uma opção:\n1 - Buscar filme\n2 - Listar todos os filmes\n3 - Adicionar filme\n4 - Remover filme\n5 - Alugar Filme\n6 - Devolver Filme\n7 - Sair\n")
+        print("Escolha uma opção:\n"
+              "1 - Buscar filme\n"
+              "2 - Listar todos os filmes\n"
+              "3 - Adicionar filme\n"
+              "4 - Remover filme\n"
+              "5 - Alugar Filme\n"
+              "6 - Devolver Filme\n"
+              "7 - Sair\n")
         try:
             option = int(input())
             cond1 = False
@@ -29,6 +37,7 @@ while True:
             os.system("cls")
             print(LDE, "\nPor favor, escolha algo válido.")
             time.sleep(3)
+
     if option == 1:
         os.system("cls")
         print(LDE)
@@ -112,6 +121,7 @@ while True:
         file.close()
         print("Filme adicionado.")
         time.sleep(2)
+
     elif option == 4:
         os.system("cls")
         print(LDE)
@@ -138,6 +148,7 @@ while True:
                         os.system("cls")
                         print(LDE)
                         Locadora.remove_node(a)
+                        Locadora.modify_file()
                         print("DVD removido com Sucesso.")
                         time.sleep(3)
                         cond1 = True
@@ -180,6 +191,7 @@ while True:
                     if Locadora.rent(type_search, str(data)) == True:
                         os.system("cls")
                         print(LDE)
+                        Locadora.modify_file()
                         print('Filme Alugado!')
                         time.sleep(3)
                         cond1 = True
@@ -227,6 +239,7 @@ while True:
                     if Locadora.give_back_movie(type_search, str(data)) == True:
                         os.system("cls")
                         print(LDE)
+                        Locadora.modify_file()
                         print('Filme Devolvido!')
                         time.sleep(3)
                         cond1 = True

@@ -1,18 +1,18 @@
-Código do DVD: 457
-Nome do filme: jujuba
-Gênero: kfhdgf
+Código do DVD: 4576
+Nome do filme: harry potter e a ordem da fênix
+Gênero: Ficção
 Situação: disponível
-Valor do aluguel: R$856.0
+Valor do aluguel: R$2.5
 -------------------------------
 Código do DVD: 2365
-Nome do filme: filme
-Gênero: kjfbdf
+Nome do filme: fragmentado
+Gênero: Suspense
 Situação: disponível
-Valor do aluguel: R$123.0
+Valor do aluguel: R$3.5
 -------------------------------
-Código do DVD: 236589
-Nome do filme: gugu]
-Gênero: jhgfhf
+Código do DVD: 5372
+Nome do filme: star wars episódio I
+Gênero: Fantasia
 Situação: disponível
-Valor do aluguel: R$1254.0
+Valor do aluguel: R$2.0
 -------------------------------
