@@ -5,10 +5,125 @@ Locadora = BST()
 LDE = "Locadora de Estrutura\n"
 
 print(LDE)
-login = input("Login: ")
-os.system("cls")
-print(LDE)
-senha = input("Senha: ")
+
+def login_check(login):
+    datafile = open('login.txt')
+    found = False
+    for line in datafile:
+        if login in line:
+            found = True
+            break
+    return found
+
+cond0 = True
+
+while cond0 == True:
+    os.system("cls")
+    print(LDE)
+    logon = input("Digite 1 caso já possua login ou 2 para cadastrar-se: ")
+    PINpad = "4242"
+    if logon == "1":
+        os.system("cls")
+        print(LDE)
+        login = input("Login: ")
+        os.system("cls")
+        print(LDE)
+        senha = input("Senha: ")
+        log_check = "Login: " + login +", Senha: " +senha +", "
+        if login_check(log_check) == True:
+            os.system("cls")
+            print(LDE)
+            PIN = input("PIN: ")
+            log_check = log_check + "PIN: " + PIN
+            if login_check(log_check) == True:
+                admin = True
+                os.system("cls")
+                print(LDE)
+                print("Seja bem vindo, Admin!")
+                time.sleep(3)
+                break
+            else:
+                print("PIN incorreto.\n Acesso Negado!")
+        elif login_check(log_check) == False:
+            log_check = "Login: " + login + ", Senha: " + senha + "."
+            if login_check(log_check) == True:
+                admin = False
+                os.system("cls")
+                print(LDE)
+                print("Seja bem vindo, Usuário!")
+                time.sleep(3)
+                break
+            elif login_check(log_check) == False:
+                log_check = "Login: " + login
+                if login_check(log_check) == True:
+                    os.system("cls")
+                    print(LDE)
+                    print("Senha incorreta para este usuário.")
+                    time.sleep(3)
+            else:
+                os.system("cls")
+                print(LDE)
+                print("Dados informados inválidos.")
+                time.sleep(3)
+
+    elif logon == "2":
+        os.system("cls")
+        print(LDE, "Criação de cadastro: ")
+        os.system("cls")
+        print(LDE)
+        nome = input("Insira seu nome completo: ")
+        os.system("cls")
+        print(LDE)
+        login = input("Insira o Login desejado: ")
+        os.system("cls")
+        print(LDE)
+        senha = input("Insira a Senha desejada: ")
+        os.system("cls")
+        print(LDE)
+        senha2 = input("Confirme a Senha inserida: ")
+        if senha2 != senha:
+            os.system("cls")
+            while senha2 != senha:
+                os.system("cls")
+                print(LDE, "As senhas não coincidem! Entre novamente com as senhas, ", nome + ".")
+                time.sleep(3)
+                os.system("cls")
+                print(LDE)
+                senha = input("Insira a Senha desejada: ")
+                senha2 = input("Confirme a Senha inserida: ")
+                if senha2 != senha:
+                    os.system("cls")
+                    print("As senhas não coincidem! Entre novamente com as senhas, ", nome + ".")
+        os.system("cls")
+        print(LDE)
+        PIN = input("Insira o código PIN caso o possua: ")
+        if senha == senha2 and PIN != PINpad:
+            os.system("cls")
+            print(LDE, "\nCadastro concluído com sucesso!")
+            print("Seja bem vindo à Locadora de Estrutura,", nome +"!")
+            time.sleep(3)
+            file = open("login.txt", "a")
+            file.write("Nome: " + str(nome))
+            file.write(", Login: " + str(login))
+            file.write(", Senha: " + str(senha) + ".")
+            file.write("\n-------------------------------\n")
+            file.close()
+        elif senha == senha2 and PIN == PINpad:
+            os.system("cls")
+            print(LDE, "\nCadastro de administrador concluído com sucesso!")
+            print("Seja bem vindo à gestão da Locadora de Estrutura,", nome + "!")
+            time.sleep(3)
+            file = open("login.txt", "a")
+            file.write("Nome: " + str(nome))
+            file.write(", Login: " + str(login))
+            file.write(", Senha: " + str(senha))
+            file.write(", PIN: " + str(PIN))
+            file.write("\n-------------------------------\n")
+            file.close()
+    else:
+        os.system("cls")
+        print(LDE, "Opção incorreta. Por favor, informe algo válido.")
+        time.sleep(3)
 
 Locadora.get_from_file()
 
@@ -113,7 +228,7 @@ while True:
         Locadora.inOrderTraversal()
         input("Pressione enter para continuar.")
 
-    elif option == 3: #Add movie
+    elif option == 3 and admin == True: #Add movie
         cond4 = True
         cond5 = True
         cond6 = True
@@ -173,8 +288,12 @@ while True:
         file.close()
         print("Filme adicionado.")
         time.sleep(2)
-
-    elif option == 4: #Remove movie
+    elif option == 3 and admin == False:
+        os.system("cls")
+        print(LDE)
+        print("Acesso não autorizado. Por favor, contate o administrador do sistema.")
+        time.sleep(3)
+    elif option == 4 and admin == True: #Remove movie
         os.system("cls")
         print(LDE)
         cond5 = True
@@ -219,7 +338,11 @@ while True:
                 print(LDE, "\nPor favor, escolha algo válido.")
                 time.sleep(3)
                 cond5 = True
-
+    elif option == 4 and admin == False:
+        os.system("cls")
+        print(LDE)
+        print("Acesso não autorizado. Por favor, contate o administrador do sistema.")
+        time.sleep(3)
     elif option == 5: #Rent movie
         os.system("cls")
         print(LDE)
